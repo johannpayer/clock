@@ -1,6 +1,8 @@
+var clockElement;
 window.onload = function () {
-    var url = "url(bg/" + Math.floor(new Date().getTime() / (1000 * 60 * 60 * 24) % 102) + ".jpg)";
-    document.body.style.backgroundImage = url;
+    document.body.style.backgroundImage = "url(bg/" +
+        Math.floor(new Date().getTime() / (1000 * 60 * 60 * 24) % 102) + ".jpg)";
+    clockElement = document.getElementById("clock");
 	updateClock();
 	setInterval(function () {
 		updateClock();
@@ -18,6 +20,6 @@ function updateClock() {
 	if (minutes.length == 1)
 		minutes = "0" + minutes;
 	
-	document.getElementById("clock").innerHTML = hours + ":" + minutes + "<br>"
+	clockElement.innerHTML = hours + ":" + minutes + "<br>"
         + daysOfTheWeek[time.getDay()] + ", " + months[time.getMonth()] + " " + time.getDate(); 
 }
