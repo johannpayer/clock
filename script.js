@@ -1,50 +1,50 @@
 var clockElement;
-var day = Math.floor(new Date().getTime() / (1000 * 60 * 60 * 24));
+var day = Math.floor((new Date() - new Date(0, 0)) / 86400000);
 window.onload = function () {
+    "use strict";
     updateBackground();
     clockElement = document.getElementById("clock");
     updateClock();
     setInterval(function () {
         updateClock();
     }, 1000);
-}
+};
 
 var daysOfTheWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
-var lastHour;
 function updateClock() {
+    "use strict";
     var time = new Date();
-    var hours = time.getHours().toString();
-    var minutes = time.getMinutes().toString();
+    var hours = time.getHours();
+    var minutes = time.getMinutes();
+    var seconds = time.getSeconds();
     
-    if (lastHour != null && hours == 0 && lastHour == 23) {
+    if (hours === 0 && minutes === 0 && seconds === 0) {
         day++;
         updateBackground();
     }
     
+    if (hours <= 12)
+        var add = "A";
+    else
+        var add = "P";
+    
     if (hours >= 12)
         hours -= 12;
-    if (minutes.length == 1)
+    if (minutes.length === 1)
         minutes = "0" + minutes;
-    var displayHours;
-    if (hours == 0)
-        displayHours = 12;
-    else
-        displayHours = hours;
     
-    var text = displayHours + ":" + minutes + " ";
-    if (hours <= 12)
-        text += "A";
+    if (hours === 0)
+        var displayHours = 12;
     else
-        text += "P";
-    text += "M<br>" +
-        daysOfTheWeek[time.getDay()] + ", " + months[time.getMonth()] + " " + time.getDate()
+        var displayHours = hours;
     
-    clockElement.innerHTML = text;
-    lastHour = hours;
+    clockElement.innerHTML = displayHours + ":" + minutes + " " + add + "M<br>" +
+        daysOfTheWeek[time.getDay()] + ", " + months[time.getMonth()] + " " + time.getDate();
 }
 
 function updateBackground() {
-    document.body.style.backgroundImage = "url(bg/" + day % 102 + ".jpg)";
+    "use strict";
+    document.body.style.backgroundImage = "url(bg/" + day % 103 + ".jpg)";
 }
