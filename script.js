@@ -19,32 +19,35 @@ function updateClock() {
     var hours = time.getHours();
     var minutes = time.getMinutes();
     var seconds = time.getSeconds();
-    
+
     if (hours === 0 && minutes === 0 && seconds === 0) {
         day++;
         updateBackground();
     }
-    
+
     if (hours <= 12)
         var add = "A";
     else
         var add = "P";
-    
+
     if (hours >= 12)
         hours -= 12;
-    if (minutes.length === 1)
-        minutes = "0" + minutes;
-    
+
+    if (minutes.toString().length === 1)
+        var displayMinutes = "0" + minutes;
+    else
+        var displayMinutes = minutes;
+
     if (hours === 0)
         var displayHours = 12;
     else
         var displayHours = hours;
-    
-    clockElement.innerHTML = displayHours + ":" + minutes + " " + add + "M<br>" +
+
+    clockElement.innerHTML = displayHours + ":" + displayMinutes + " " + add + "M<br>" +
         daysOfTheWeek[time.getDay()] + ", " + months[time.getMonth()] + " " + time.getDate();
 }
 
 function updateBackground() {
     "use strict";
-    document.body.style.backgroundImage = "url(bg/" + day % 103 + ".jpg)";
+    document.body.style.backgroundImage = "url('bg/img (" + day % 118 + ").jpg')";
 }
