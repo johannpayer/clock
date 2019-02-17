@@ -4,23 +4,23 @@ window.onload = function () {
     "use strict";
     updateBackground();
     clockElement = document.getElementById("clock");
-    updateClock();
+    updateClock(true);
     setInterval(function () {
-        updateClock();
+        updateClock(false);
     }, 1000);
 };
 
 var daysOfTheWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
-function updateClock() {
+function updateClock(force) {
     "use strict";
     var time = new Date();
     var hours = time.getHours();
     var minutes = time.getMinutes();
     var seconds = time.getSeconds();
-
-    if (hours === 0 && minutes === 0 && seconds === 0) {
+    if (seconds == 0 || force) {
+        if (hours === 0 && minutes === 0) {
         day++;
         updateBackground();
     }
@@ -45,9 +45,10 @@ function updateClock() {
 
     clockElement.innerHTML = displayHours + ":" + displayMinutes + " " + add + "M<br>" +
         daysOfTheWeek[time.getDay()] + ", " + months[time.getMonth()] + " " + time.getDate();
+    }
 }
 
 function updateBackground() {
     "use strict";
-    document.body.style.backgroundImage = "url('bg/img (" + day % 118 + ").jpg')";
+    document.body.style.backgroundImage = "url('bg/img (" + (day % 118 + 1) + ").jpg')";
 }
