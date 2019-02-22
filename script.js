@@ -51,4 +51,7 @@ function updateClock(force) {
 function updateBackground() {
     "use strict";
     document.body.style.backgroundImage = "url('bg/img (" + (day % 118 + 1) + ").jpg')";
+    setTimeout(function () {
+        document.body.style.opacity = 1;
+    }, 600);
 }
