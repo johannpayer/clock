@@ -8,6 +8,7 @@
     padding-top: 86.5vh;
     margin: 0;
     border: 0;
+    user-select: none;
 }
 
 body {
