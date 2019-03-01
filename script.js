@@ -50,7 +50,7 @@ function updateClock(force) {
 
 function updateBackground() {
     "use strict";
-    var dayURL = day % 118 + 1
+    var dayURL = day % 117 + 1
     document.body.style.backgroundImage = "url('bg/img (" + dayURL + ").jpg')";
     if ([9, 11, 30, 35, 41, 48, 67, 72, 91, 98].includes(dayURL))
         clockElement.style.color = "black";
