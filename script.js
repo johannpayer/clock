@@ -56,7 +56,4 @@ function updateBackground() {
         clockElement.style.color = "black";
     else
         clockElement.style.color = "white";
-    setTimeout(function() {
-        document.body.style.opacity = 1;
-    }, 600);
 }
