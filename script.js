@@ -1,7 +1,8 @@
+"use strict";
+
 var clockElement;
 var day = Math.floor((new Date() - new Date(0, 0)) / 86400000);
 window.onload = function() {
-    "use strict";
     clockElement = document.getElementById("clock");
     updateBackground();
     updateClock(true);
@@ -14,7 +15,6 @@ var daysOfTheWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Fr
 var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
 function updateClock(force) {
-    "use strict";
     var time = new Date();
     var hours = time.getHours();
     var minutes = time.getMinutes();
@@ -49,7 +49,6 @@ function updateClock(force) {
 }
 
 function updateBackground() {
-    "use strict";
     var dayURL = day % 117 + 1
     document.body.style.backgroundImage = "url('bg/img (" + dayURL + ").jpg')";
     if ([9, 11, 30, 35, 41, 48, 67, 72, 91, 98].includes(dayURL))
