@@ -19,7 +19,7 @@ function updateClock(force) {
     var hours = time.getHours();
     var minutes = time.getMinutes();
     var seconds = time.getSeconds();
-    if (seconds == 0 || force) {
+    if (seconds === 0 || force) {
         if (hours === 0 && minutes === 0) {
             day++;
             updateBackground();
