@@ -1,12 +1,26 @@
 "use strict";
 
+Date.prototype.stdTimezoneOffset = function () {
+    var january = new Date(this.getFullYear(), 0, 1);
+    var july = new Date(this.getFullYear(), 6, 1);
+    return Math.max(january.getTimezoneOffset(), july.getTimezoneOffset());
+}
+
+Date.prototype.isDstObserved = function () {
+    return this.getTimezoneOffset() < this.stdTimezoneOffset();
+}
+
 var clockElement;
-var day = Math.floor((new Date() - new Date(0, 0)) / 86400000);
-window.onload = function() {
+var add = 0;
+var time = new Date();
+if (time.isDstObserved())
+    add = 3600000;
+var day = Math.floor((time - new Date(0, 0) + add) / 86400000);
+window.onload = function () {
     clockElement = document.getElementById("clock");
     updateBackground();
     updateClock(true);
-    setInterval(function() {
+    setInterval(function () {
         updateClock(false);
     }, 1000);
 };
