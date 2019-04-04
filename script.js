@@ -11,10 +11,11 @@ Date.prototype.isDstObserved = function () {
 }
 
 var clockElement;
-var add = 0;
 var time = new Date();
 if (time.isDstObserved())
-    add = 3600000;
+    var add = 3600000;
+else
+    var add = 0;
 var day = Math.floor((time - new Date(0, 0) + add) / 86400000);
 window.onload = function () {
     clockElement = document.getElementById("clock");
@@ -27,7 +28,6 @@ window.onload = function () {
 
 var daysOfTheWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-
 function updateClock(force) {
     var time = new Date();
     var hours = time.getHours();
@@ -62,10 +62,11 @@ function updateClock(force) {
     }
 }
 
+var blackTextIDs = [9, 11, 30, 35, 41, 48, 67, 72, 91, 98, 121, 128];
 function updateBackground() {
     var dayURL = day % 132 + 1;
     document.body.style.backgroundImage = "url('bg/img (" + dayURL + ").jpg')";
-    if ([9, 11, 30, 35, 41, 48, 67, 72, 91, 98, 121, 128].includes(dayURL))
+    if (blackTextIDs.includes(dayURL))
         clockElement.style.color = "black";
     else
         clockElement.style.color = "white";
