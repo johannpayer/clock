@@ -44,12 +44,10 @@ function updateClock(force) {
 	}
 }
 
-var blackTextIDs = [9, 11, 30, 35, 41, 48, 67, 72, 91, 98, 121, 128, 132];
-
 function updateBackground() {
 	var dayURL = Math.floor(pseudorandom(day) * 132 + 1);
 	document.body.style.backgroundImage = "url('bg/img (" + dayURL + ").jpg')";
-	clockElement.style.color = blackTextIDs.includes(dayURL) ? "black" : "white";
+	clockElement.style.color = [9, 11, 30, 35, 41, 48, 67, 72, 91, 98, 121, 128, 132].includes(dayURL) ? "black" : "white";
 }
 
 function pseudorandom(seed) {
