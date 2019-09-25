@@ -35,10 +35,7 @@ function updateClock(force) {
 			updateBackground();
 		}
 
-		if (hours >= 12)
-			hours -= 12;
-
-		clockElement.innerHTML = (hours === 0 ? 12 : hours) + ":" + (minutes.toString().length === 1 ? "0" : "") +
+		clockElement.innerHTML = (hours === 0 ? 12 : hours % 12) + ":" + (minutes.toString().length === 1 ? "0" : "") +
 			minutes + " " + (hours <= 12 ? "A" : "P") + "M<br>" + daysOfTheWeek[time.getDay()] + ", " +
 			months[time.getMonth()] + " " + time.getDate();
 	}
