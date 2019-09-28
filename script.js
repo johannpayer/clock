@@ -33,9 +33,9 @@ function updateClock(force) {
 }
 
 function updateBackground() {
-	var dayURL = Math.floor(pseudorandom(day) * backgrounds.length + 1);
+	var dayURL = Math.floor(pseudorandom(day) * backgrounds.length);
     var background = backgrounds[dayURL];
-	document.body.style.backgroundImage = "url(https://source.unsplash.com/" + background.PhotoID + ")";
+	document.body.style.backgroundImage = "url(https://images.unsplash.com/photo-" + background.PhotoID + ")";
 	clockElement.style.color = background.BlackText ? "black" : "white";
 }
 
