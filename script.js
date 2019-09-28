@@ -1,18 +1,12 @@
 "use strict";
 
-Date.prototype.stdTimezoneOffset = function () {
-	var january = new Date(this.getFullYear(), 0, 1),
-		july = new Date(this.getFullYear(), 6, 1);
-	return Math.max(january.getTimezoneOffset(), july.getTimezoneOffset());
-};
-
-Date.prototype.isDstObserved = function () {
-	return this.getTimezoneOffset() < this.stdTimezoneOffset();
-};
+var backgrounds;
+$.getJSON("https://raw.githubusercontent.com/flamesdev/clock/master/data.json", function (json) {
+	backgrounds = json.Backgrounds;
+});
 
 var clockElement;
-var time = new Date();
-var day = Math.floor((time - new Date(0, 0) + (time.isDstObserved() ? 3600000 : 0)) / 86400000);
+var day = Math.ceil((new Date() - new Date(0, 0)) / 8.64e7);
 window.onload = function () {
 	clockElement = document.getElementById("clock");
 	updateBackground();
@@ -22,29 +16,27 @@ window.onload = function () {
 	}, 1000);
 };
 
-var daysOfTheWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-
 function updateClock(force) {
-	var time = new Date();
-	var hours = time.getHours(),
-		minutes = time.getMinutes();
-	if (time.getSeconds() === 0 || force) {
+	var date = new Date();
+	var hours = date.getHours(),
+		minutes = date.getMinutes();
+	if (date.getSeconds() === 0 || force) {
 		if (hours === 0 && minutes === 0) {
 			day++;
 			updateBackground();
 		}
 
 		clockElement.innerHTML = (hours === 0 ? 12 : hours % 12) + ":" + (minutes.toString().length === 1 ? "0" : "") +
-			minutes + " " + (hours <= 12 ? "A" : "P") + "M<br>" + daysOfTheWeek[time.getDay()] + ", " +
-			months[time.getMonth()] + " " + time.getDate();
+			minutes + " " + (hours <= 12 ? "A" : "P") + "M<br>" +
+            date.toLocaleDateString('en-us', { month: 'long', day: 'numeric', weekday: 'long' });
 	}
 }
 
 function updateBackground() {
-	var dayURL = Math.floor(pseudorandom(day) * 132 + 1);
-	document.body.style.backgroundImage = "url('bg/img (" + dayURL + ").jpg')";
-	clockElement.style.color = [9, 11, 30, 35, 41, 48, 67, 72, 91, 98, 121, 128, 132].includes(dayURL) ? "black" : "white";
+	var dayURL = Math.floor(pseudorandom(day) * backgrounds.length + 1);
+    var background = backgrounds[dayURL];
+	document.body.style.backgroundImage = "url(https://source.unsplash.com/" + background.PhotoID + ")";
+	clockElement.style.color = background.BlackText ? "black" : "white";
 }
 
 function pseudorandom(seed) {
