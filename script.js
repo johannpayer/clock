@@ -24,8 +24,9 @@ function updateClock(force) {
 			updateBackground();
 		}
 
-		clockElement.innerHTML = (hours === 0 ? 12 : hours % 12) + ":" + (minutes.toString().length === 1 ? "0" : "") +
-			minutes + " " + (hours <= 12 ? "A" : "P") + "M<br>" +
+        var displayHours = hours % 12;
+		clockElement.innerHTML = (displayHours === 0 ? 12 : displayHours) + ":" + (minutes.toString().length === 1 ? "0" : "") +
+			minutes + " " + (hours < 12 ? "A" : "P") + "M<br>" +
 			date.toLocaleDateString('en-us', {
 				month: 'long',
 				day: 'numeric',
