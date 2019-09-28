@@ -1,20 +1,18 @@
 "use strict";
 
 var backgrounds;
-$.getJSON("https://raw.githubusercontent.com/flamesdev/clock/master/data.json", function (json) {
-	backgrounds = json.Backgrounds;
-});
-
 var clockElement;
 var day = Math.ceil((new Date() - new Date(0, 0)) / 8.64e7);
-window.onload = function () {
+$.getJSON("https://raw.githubusercontent.com/flamesdev/clock/master/data.json", function (json) {
+	backgrounds = json.Backgrounds;
+
 	clockElement = document.getElementById("clock");
 	updateBackground();
 	updateClock(true);
 	setInterval(function () {
 		updateClock(false);
 	}, 1000);
-};
+});
 
 function updateClock(force) {
 	var date = new Date();
@@ -28,13 +26,17 @@ function updateClock(force) {
 
 		clockElement.innerHTML = (hours === 0 ? 12 : hours % 12) + ":" + (minutes.toString().length === 1 ? "0" : "") +
 			minutes + " " + (hours <= 12 ? "A" : "P") + "M<br>" +
-            date.toLocaleDateString('en-us', { month: 'long', day: 'numeric', weekday: 'long' });
+			date.toLocaleDateString('en-us', {
+				month: 'long',
+				day: 'numeric',
+				weekday: 'long'
+			});
 	}
 }
 
 function updateBackground() {
 	var dayURL = Math.floor(pseudorandom(day) * backgrounds.length);
-    var background = backgrounds[dayURL];
+	var background = backgrounds[dayURL];
 	document.body.style.backgroundImage = "url(https://images.unsplash.com/photo-" + background.PhotoID + ")";
 	clockElement.style.color = background.BlackText ? "black" : "white";
 }
