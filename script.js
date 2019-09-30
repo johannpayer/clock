@@ -15,9 +15,9 @@ $.getJSON("https://raw.githubusercontent.com/flamesdev/clock/master/data.json", 
 
 function updateClock(force) {
 	var date = new Date();
-	var hours = date.getHours(),
-		minutes = date.getMinutes();
 	if (date.getSeconds() === 0 || force) {
+		var hours = date.getHours(),
+			minutes = date.getMinutes();
 		if (hours === 0 && minutes === 0)
 			updateBackground();
 
