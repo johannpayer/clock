@@ -2,7 +2,6 @@
 
 var backgrounds;
 var clockElement;
-var day = Math.ceil((new Date() - new Date(0, 0)) / 8.64e7);
 $.getJSON("https://raw.githubusercontent.com/flamesdev/clock/master/data.json", function (json) {
 	backgrounds = json.Backgrounds;
 
@@ -19,12 +18,10 @@ function updateClock(force) {
 	var hours = date.getHours(),
 		minutes = date.getMinutes();
 	if (date.getSeconds() === 0 || force) {
-		if (hours === 0 && minutes === 0) {
-			day++;
+		if (hours === 0 && minutes === 0)
 			updateBackground();
-		}
 
-        var displayHours = hours % 12;
+		var displayHours = hours % 12;
 		clockElement.innerHTML = (displayHours === 0 ? 12 : displayHours) + ":" + (minutes.toString().length === 1 ? "0" : "") +
 			minutes + " " + (hours < 12 ? "A" : "P") + "M<br>" +
 			date.toLocaleDateString('en-us', {
@@ -36,7 +33,11 @@ function updateClock(force) {
 }
 
 function updateBackground() {
-	var dayURL = Math.floor(pseudorandom(day) * backgrounds.length);
+	var dayURL = Math.floor(pseudorandom(pseudorandom(new Date().toLocaleDateString('en-us', {
+		year: 'numeric',
+		month: 'numeric',
+		day: 'numeric'
+	}).hashCode())) * backgrounds.length);
 	var background = backgrounds[dayURL];
 	document.body.style.backgroundImage = "url(https://images.unsplash.com/photo-" + background.PhotoID + ")";
 	clockElement.style.color = background.BlackText ? "black" : "white";
@@ -47,4 +48,16 @@ function pseudorandom(seed) {
 	seed = Math.imul(seed ^ seed >>> 15, seed | 1);
 	seed ^= seed + Math.imul(seed ^ seed >>> 7, seed | 61);
 	return ((seed ^ seed >>> 14) >>> 0) / 4294967296;
+}
+
+String.prototype.hashCode = function () {
+	var hash = 0,
+		i, chr;
+	if (this.length === 0) return hash;
+	for (i = 0; i < this.length; i++) {
+		chr = this.charCodeAt(i);
+		hash = ((hash << 5) - hash) + chr;
+		hash |= 0;
+	}
+	return hash;
 }
