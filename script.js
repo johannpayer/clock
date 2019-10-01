@@ -33,12 +33,11 @@ function updateClock(force) {
 }
 
 function updateBackground() {
-	var dayURL = Math.floor(pseudorandom(pseudorandom(new Date().toLocaleDateString('en-us', {
+	var background = backgrounds[Math.floor(pseudorandom(new Date().toLocaleDateString('en-us', {
 		year: 'numeric',
 		month: 'numeric',
 		day: 'numeric'
-	}).hashCode())) * backgrounds.length);
-	var background = backgrounds[dayURL];
+	}).hashCode()) * backgrounds.length)];
 	document.body.style.backgroundImage = "url(https://images.unsplash.com/photo-" + background.PhotoID + ")";
 	clockElement.style.color = background.BlackText ? "black" : "white";
 }
