@@ -1,11 +1,9 @@
 @import url('https://fonts.googleapis.com/css?family=Montserrat:400');
 
 #clock {
-    text-align: left;
     font-family: 'Montserrat', 'Arial';
     font-size: 5vh;
     color: white;
-    padding: 0;
     padding-left: 0.5vw;
     padding-top: 86vh;
     margin: 0;
