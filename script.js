@@ -2,7 +2,12 @@
 
 var backgrounds;
 var clockElement;
+var backgroundSeed;
 $.getJSON("https://raw.githubusercontent.com/flamesdev/clock/master/data.json", function (json) {
+	var args = window.location.href.split("?seed=");
+	if (args.length === 2)
+		backgroundSeed = args[1];
+
 	backgrounds = json.Backgrounds;
 
 	clockElement = document.getElementById("clock");
@@ -33,11 +38,11 @@ function updateClock(force) {
 }
 
 function updateBackground() {
-	var background = backgrounds[Math.floor(pseudorandom(new Date().toLocaleDateString('en-us', {
+	var background = backgrounds[Math.floor(pseudorandom((backgroundSeed === undefined ? new Date().toLocaleDateString('en-us', {
 		year: 'numeric',
 		month: 'numeric',
 		day: 'numeric'
-	}).hashCode()) * backgrounds.length)];
+	}) : backgroundSeed).hashCode()) * backgrounds.length)];
 	document.body.style.backgroundImage = "url(https://images.unsplash.com/photo-" + background.PhotoID + ")";
 	clockElement.style.color = background.BlackText ? "black" : "white";
 }
