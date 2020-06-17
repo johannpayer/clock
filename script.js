@@ -55,7 +55,7 @@ function pseudorandom(seed) {
 }
 
 String.prototype.hashCode = function () {
-	let hash;
+	let hash = 0;
 	for (let i = 0; i < this.length; i++) {
 		hash = ((hash << 5) - hash) + this.charCodeAt(i);
 		hash |= 0;
