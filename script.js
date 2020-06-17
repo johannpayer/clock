@@ -1,32 +1,32 @@
 "use strict";
 
-var backgrounds;
-var clockElement;
-var backgroundSeed;
+let backgrounds;
+let clockElement;
+let backgroundSeed;
 $.getJSON("https://raw.githubusercontent.com/flamesdev/clock/master/data.json", function (json) {
-	var args = window.location.href.split("?seed=");
-	if (args.length === 2)
+	let args = window.location.href.split("?seed=");
+	if (args.length === 2) {
 		backgroundSeed = args[1];
+	}
 
 	backgrounds = json.Backgrounds;
 
 	clockElement = document.getElementById("clock");
 	updateBackground();
 	updateClock(true);
-	setInterval(function () {
-		updateClock(false);
-	}, 1000);
+	setInterval(() => updateClock(false), 1000);
 });
 
 function updateClock(force) {
-	var date = new Date();
+	let date = new Date();
 	if (date.getSeconds() === 0 || force) {
-		var hours = date.getHours(),
-			minutes = date.getMinutes();
-		if (hours === 0 && minutes === 0)
+		let hours = date.getHours();
+		let minutes = date.getMinutes();
+		if (hours === 0 && minutes === 0) {
 			updateBackground();
+		}
 
-		var displayHours = hours % 12;
+		let displayHours = hours % 12;
 		clockElement.innerHTML = (displayHours === 0 ? 12 : displayHours) + ":" + (minutes.toString().length === 1 ? "0" : "") +
 			minutes + " " + (hours < 12 ? "A" : "P") + "M<br>" +
 			date.toLocaleDateString('en-us', {
@@ -38,7 +38,7 @@ function updateClock(force) {
 }
 
 function updateBackground() {
-	var background = backgrounds[Math.floor(pseudorandom((backgroundSeed === undefined ? new Date().toLocaleDateString('en-us', {
+	let background = backgrounds[Math.floor(pseudorandom((backgroundSeed === undefined ? new Date().toLocaleDateString('en-us', {
 		year: 'numeric',
 		month: 'numeric',
 		day: 'numeric'
@@ -55,12 +55,9 @@ function pseudorandom(seed) {
 }
 
 String.prototype.hashCode = function () {
-	var hash = 0,
-		i, chr;
-	if (this.length === 0) return hash;
-	for (i = 0; i < this.length; i++) {
-		chr = this.charCodeAt(i);
-		hash = ((hash << 5) - hash) + chr;
+	let hash;
+	for (let i = 0; i < this.length; i++) {
+		hash = ((hash << 5) - hash) + this.charCodeAt(i);
 		hash |= 0;
 	}
 	return hash;
