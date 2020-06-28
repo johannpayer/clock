@@ -2,10 +2,10 @@
 
 #clock {
     font-family: 'Montserrat', 'Arial';
-    font-size: 5vh;
+    font-size: 46px;
     color: white;
-    padding-left: 0.5vw;
-    padding-top: 86vh;
+    padding-left: 8px;
+    padding-top: calc(100vh - 132px);
     margin: 0;
     user-select: none;
     animation: fadeIn 2s;
@@ -14,7 +14,6 @@
 body {
     background-color: black;
     background-position: center center;
-    background-repeat: no-repeat;
     background-size: cover;
 }
 
