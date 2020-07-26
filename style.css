@@ -15,6 +15,7 @@ body {
     background-color: black;
     background-position: center center;
     background-size: cover;
+    overflow: hidden;
 }
 
 @keyframes fadeIn {
