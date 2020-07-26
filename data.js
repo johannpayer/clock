@@ -1,5 +1,4 @@
-var backgrounds = [
-  {
+var backgrounds = [{
     "PhotoId": "1549599273-86affaa16e00",
     "BlackText": false
   },
@@ -467,76 +466,76 @@ var backgrounds = [
     "PhotoId": "1501213045308-cfe6e352d850",
     "BlackText": false
   },
-	{
-		"PhotoId": "1595681224916-98844d59ea47",
-		"BlackText": true
-	},
-	{
-		"PhotoId": "1595657241488-468423581c23",
-		"BlackText": true
-	},
-	{
-		"PhotoId": "1588099246635-d6868ab08b44",
-		"BlackText": false
-	},
-	{
-		"PhotoId": "1595605165365-cb52a719cbd9",
-		"BlackText": false
-	},
-	{
-		"PhotoId": "1595683763139-808e8f31b1a7",
-		"BlackText": false
-	},
-	{
-		"PhotoId": "1595589982168-77b64bc1b485",
-		"BlackText": false
-	},
-	{
-		"PhotoId": "1595584139927-1cc794198ee7",
-		"BlackText": false
-	},
-	{
-		"PhotoId": "1595596702299-1cfeca505d85",
-		"BlackText": false
-	},
-	{
-		"PhotoId": "1595533768273-e8bee69577ee",
-		"BlackText": false
-	},
-	{
-		"PhotoId": "1595590706419-1a57fcce3090",
-		"BlackText": false
-	},
-	{
-		"PhotoId": "1595520519880-a86c48ea536c",
-		"BlackText": false
-	},
-	{
-		"PhotoId": "1595263541740-cd107dce365d",
-		"BlackText": false
-	},
-	{
-		"PhotoId": "1595255967279-ad1d4d8db400",
-		"BlackText": false
-	},
-	{
-		"PhotoId": "1594038658121-219eda06322c",
-		"BlackText": false
-	},
-	{
-		"PhotoId": "1585335374511-84eb54dc2396",
-		"BlackText": false
-	},
-	{
-		"PhotoId": "1569690324072-c6c46dad3194",
-		"BlackText": false
-	},
-	{
-		"PhotoId": "1474433188271-d3f339f41911",
-		"BlackText": false
-	},
-	{
-		"PhotoId": "1594882471743-2758d2ce5f00",
-		"BlackText": false
-	},
+  {
+    "PhotoId": "1595681224916-98844d59ea47",
+    "BlackText": true
+  },
+  {
+    "PhotoId": "1595657241488-468423581c23",
+    "BlackText": true
+  },
+  {
+    "PhotoId": "1588099246635-d6868ab08b44",
+    "BlackText": false
+  },
+  {
+    "PhotoId": "1595605165365-cb52a719cbd9",
+    "BlackText": false
+  },
+  {
+    "PhotoId": "1595683763139-808e8f31b1a7",
+    "BlackText": false
+  },
+  {
+    "PhotoId": "1595589982168-77b64bc1b485",
+    "BlackText": false
+  },
+  {
+    "PhotoId": "1595584139927-1cc794198ee7",
+    "BlackText": false
+  },
+  {
+    "PhotoId": "1595596702299-1cfeca505d85",
+    "BlackText": false
+  },
+  {
+    "PhotoId": "1595533768273-e8bee69577ee",
+    "BlackText": false
+  },
+  {
+    "PhotoId": "1595590706419-1a57fcce3090",
+    "BlackText": false
+  },
+  {
+    "PhotoId": "1595520519880-a86c48ea536c",
+    "BlackText": false
+  },
+  {
+    "PhotoId": "1595263541740-cd107dce365d",
+    "BlackText": false
+  },
+  {
+    "PhotoId": "1595255967279-ad1d4d8db400",
+    "BlackText": false
+  },
+  {
+    "PhotoId": "1594038658121-219eda06322c",
+    "BlackText": false
+  },
+  {
+    "PhotoId": "1585335374511-84eb54dc2396",
+    "BlackText": false
+  },
+  {
+    "PhotoId": "1569690324072-c6c46dad3194",
+    "BlackText": false
+  },
+  {
+    "PhotoId": "1474433188271-d3f339f41911",
+    "BlackText": false
+  },
+  {
+    "PhotoId": "1594882471743-2758d2ce5f00",
+    "BlackText": false
+  },
 ]
