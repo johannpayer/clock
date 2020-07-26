@@ -1,13 +1,10 @@
-let clockElement;
 let backgroundSeed;
-
 $(function () {
   let args = window.location.href.split("?seed=");
   if (args.length === 2) {
     backgroundSeed = args[1];
   }
 
-  clockElement = document.getElementById("clock");
   updateBackground();
   updateClock(true);
   setInterval(() => updateClock(false), 1000);
@@ -23,7 +20,7 @@ function updateClock(force) {
     }
 
     let displayHours = hours % 12;
-    clockElement.innerHTML = (displayHours === 0 ? 12 : displayHours) + ":" + (minutes.toString().length === 1 ? "0" : "") +
+    clock.innerHTML = (displayHours === 0 ? 12 : displayHours) + ":" + (minutes.toString().length === 1 ? "0" : "") +
       minutes + " " + (hours < 12 ? "A" : "P") + "M<br>" +
       date.toLocaleDateString('en-us', {
         month: 'long',
@@ -40,7 +37,7 @@ function updateBackground() {
     day: 'numeric'
   }) : backgroundSeed).hashCode()) * backgrounds.length)];
   document.body.style.backgroundImage = "url(https://images.unsplash.com/photo-" + background.PhotoId + ")";
-  clockElement.style.color = background.BlackText ? "black" : "white";
+  clock.style.color = background.BlackText ? "black" : "white";
 }
 
 let seed;
