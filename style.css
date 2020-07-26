@@ -1,24 +1,27 @@
 @import url('https://fonts.googleapis.com/css?family=Montserrat:400');
-
 #clock {
-    font-family: 'Montserrat', 'Arial';
-    font-size: 46px;
-    color: white;
-    padding-left: 8px;
-    padding-top: calc(100vh - 132px);
-    margin: 0;
-    user-select: none;
-    animation: fadeIn 2s;
+  font-family: 'Montserrat', 'Arial';
+  font-size: 46px;
+  color: white;
+  padding-left: 8px;
+  padding-top: calc(100vh - 132px);
+  margin: 0;
+  user-select: none;
+  animation: fadeIn 2s;
 }
 
 body {
-    background-color: black;
-    background-position: center center;
-    background-size: cover;
-    overflow: hidden;
+  background-color: black;
+  background-position: center center;
+  background-size: cover;
+  overflow: hidden;
 }
 
 @keyframes fadeIn {
-    from { opacity: 0; }
-    to   { opacity: 1; }
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
