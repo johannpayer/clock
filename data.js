@@ -546,4 +546,20 @@ var backgrounds = [{
     "PhotoId": "1595831888313-fb478bd3dbf8",
     "BlackText": false
   },
+  {
+    "PhotoId": "1596521567866-0829c4393585",
+    "BlackText": false,
+  },
+  {
+    "PhotoId": "1596699917234-1c93c61a1083",
+    "BlackText": false,
+  },
+  {
+    "PhotoId": "1596609981355-872adf85cf76",
+    "BlackText": false,
+  },
+  {
+    "PhotoId": "1514839409115-cd33e1520f82",
+    "BlackText": false,
+  },
 ]

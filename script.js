@@ -11,15 +11,15 @@ $(function () {
 });
 
 function updateClock(force) {
-  let date = new Date();
+  const date = new Date();
   if (date.getSeconds() === 0 || force) {
-    let hours = date.getHours();
-    let minutes = date.getMinutes();
+    const hours = date.getHours();
+    const minutes = date.getMinutes();
     if (hours === 0 && minutes === 0 && backgroundSeed === null) {
       updateBackground();
     }
 
-    let displayHours = hours % 12;
+    const displayHours = hours % 12;
     clock.innerHTML = (displayHours === 0 ? 12 : displayHours) + ":" + (minutes.toString().length === 1 ? "0" : "") + minutes + " " + (hours < 12 ? "A" : "P") + "M<br>" +
       date.toLocaleDateString('en-us', {
         month: 'long',
@@ -30,7 +30,7 @@ function updateClock(force) {
 }
 
 function updateBackground() {
-  let background = backgrounds[Math.floor(pseudorandom((backgroundSeed === null ? new Date().toLocaleDateString('en-us', {
+  const background = backgrounds[Math.floor(pseudorandom((backgroundSeed === null ? new Date().toLocaleDateString('en-us', {
     year: 'numeric',
     month: 'numeric',
     day: 'numeric'
