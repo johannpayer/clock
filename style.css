@@ -4,7 +4,7 @@
   font-size: 46px;
   color: white;
   padding-left: 8px;
-  padding-top: calc(100vh - 132px);
+  padding-top: calc(100vh - 128px);
   margin: 0;
   user-select: none;
   animation: fadeIn 2s;
@@ -13,6 +13,7 @@
 body {
   background-color: black;
   background-position: center center;
+  background-repeat : no-repeat;
   background-size: cover;
   overflow: hidden;
 }
