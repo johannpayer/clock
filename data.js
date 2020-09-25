@@ -126,7 +126,6 @@ var backgrounds = [
   [ '1595589982168-77b64bc1b485', false ],
   [ '1595584139927-1cc794198ee7', false ],
   [ '1595596702299-1cfeca505d85', false ],
-  [ '1595533768273-e8bee69577ee', false ],
   [ '1595590706419-1a57fcce3090', false ],
   [ '1595520519880-a86c48ea536c', false ],
   [ '1595263541740-cd107dce365d', false ],
@@ -147,4 +146,9 @@ var backgrounds = [
   [ '1599488615731-7e5c2823ff28', false ],
   [ '1590149567612-ad425931cec0', true ],
   [ '1581913020283-9ec0e4200b48', false ],
+  [ '1557310717-d6bea9f36682', false ],
+  [ '1558961363-fa8fdf82db35', false ],
+  [ '1484723091739-30a097e8f929', false ],
+  [ '1549007953-2f2dc0b24019', false ],
+  [ '1600463046472-73e1ebaf460a', false ],
 ].map((x) => ({ photoId : x[0], showBlackText : x[1] }));
