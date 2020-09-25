@@ -105,7 +105,6 @@ var backgrounds = [
   [ '1591880765211-b9555f3ddfea', false ],
   [ '1591880765599-f0ed6b7c06ff', false ],
   [ '1591880765153-ab6a11bafdb7', false ],
-  [ '1592401883513-fa24b4090580', false ],
   [ '1592382419665-40ded771c471', false ],
   [ '1592334679391-6e6b0f2fe96c', false ],
   [ '1592334454447-7d0aa7feda01', false ],
