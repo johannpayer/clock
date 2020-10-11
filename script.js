@@ -1,32 +1,23 @@
 let backgroundSeed = null;
 
-function getStringHashCode(str) {
-  /* eslint-disable no-bitwise */
-  let hash = 0;
-  for (let i = 0; i < str.length; i++) {
-    hash = ((hash << 5) - hash) + str.charCodeAt(i);
-    hash |= 0;
+// adapted from "bryc" https://stackoverflow.com/questions/7616461/generate-a-hash-from-string-in-javascript
+function cyrb53(str, seed = 0) {
+  let h1 = 0xdeadbeef ^ seed;
+  let h2 = 0x41c6ce57 ^ seed;
+  for (let i = 0, ch; i < str.length; i++) {
+      ch = str.charCodeAt(i);
+      h1 = Math.imul(h1 ^ ch, 2654435761);
+      h2 = Math.imul(h2 ^ ch, 1597334677);
   }
-
-  return hash;
-}
-
-function pseudorandom(seed) {
-  /* eslint-disable no-bitwise */
-  /* eslint-disable no-mixed-operators */
-  let num = seed + 0x6D2B79F5;
-  num = Math.imul(num ^ num >>> 15, num | 1);
-  num ^= num + Math.imul(num ^ num >>> 7, num | 61);
-  return ((num ^ num >>> 14) >>> 0) / 4294967296;
+  h1 = Math.imul(h1 ^ (h1 >>> 16), 2246822507) ^ Math.imul(h2 ^ (h2 >>> 13), 3266489909);
+  h2 = Math.imul(h2 ^ (h2 >>> 16), 2246822507) ^ Math.imul(h1 ^ (h1 >>> 13), 3266489909);
+  return 4294967296 * (2097151 & h2) + (h1 >>> 0);
 }
 
 function updateBackground() {
-  const hashCode = getStringHashCode(backgroundSeed === null ? new Date().toLocaleDateString('en-us', {
-    year : 'numeric',
-    month : 'numeric',
-    day : 'numeric',
-  }) : backgroundSeed);
-  const background = backgrounds[Math.floor(pseudorandom(hashCode) * backgrounds.length)];
+  const date = new Date();
+  date.setHours(0, 0, 0, 0);
+  const background = backgrounds[cyrb53(date) % backgrounds.length];
   document.body.style.backgroundImage = `url(https://images.unsplash.com/photo-${background.photoId})`;
   clock.style.color = background.showBlackText ? 'black' : 'white';
 }
