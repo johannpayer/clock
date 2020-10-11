@@ -39,7 +39,7 @@ function updateClock(force) {
   }
 }
 
-$(() => {
+window.addEventListener('load', () => {
   const args = window.location.href.split('?seed=');
   if (args.length === 2) {
     // eslint-disable-next-line prefer-destructuring
