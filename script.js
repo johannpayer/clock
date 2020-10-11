@@ -15,9 +15,7 @@ function cyrb53(str, seed = 0) {
 }
 
 function updateBackground() {
-  const date = new Date();
-  date.setHours(0, 0, 0, 0);
-  const background = backgrounds[cyrb53(date) % backgrounds.length];
+  const background = backgrounds[cyrb53(backgroundSeed || new Date().setHours(0, 0, 0, 0).toString()) % backgrounds.length];
   document.body.style.backgroundImage = `url(https://images.unsplash.com/photo-${background.photoId})`;
   clock.style.color = background.showBlackText ? 'black' : 'white';
 }
