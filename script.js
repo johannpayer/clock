@@ -29,7 +29,7 @@ function updateClock(force) {
     }
 
     const displayHours = hours % 12;
-    clock.innerHTML = `${displayHours === 0 ? 12 : displayHours}:${minutes.toString().length === 1 ? '0' : ''}${minutes} ${hours < 12 ? 'A' : 'P'}M<br>${
+    clock.innerHTML = `${displayHours || 12}:${minutes < 10 ? '0' : ''}${minutes} ${hours < 12 ? 'A' : 'P'}M<br>${
       date.toLocaleDateString('en-us', {
         month : 'long',
         day : 'numeric',
