@@ -1,21 +1,20 @@
 let backgroundSeed = null;
 
 // adapted from "bryc" https://stackoverflow.com/questions/7616461/generate-a-hash-from-string-in-javascript
-function cyrb53(str, seed = 0) {
-  let h1 = 3735928559 ^ seed;
-  let h2 = 1103547991 ^ seed;
-  for (let i = 0, ch; i < str.length; i++) {
-      ch = str.charCodeAt(i);
-      h1 = Math.imul(h1 ^ ch, 2654435761);
-      h2 = Math.imul(h2 ^ ch, 1597334677);
-  }
-  h1 = Math.imul(h1 ^ (h1 >>> 16), 2246822507) ^ Math.imul(h2 ^ (h2 >>> 13), 3266489909);
-  h2 = Math.imul(h2 ^ (h2 >>> 16), 2246822507) ^ Math.imul(h1 ^ (h1 >>> 13), 3266489909);
-  return 4294967296 * (2097151 & h2) + (h1 >>> 0);
+function pseudorandom(string) {
+  const hashes = [ 3735928559, 1103547991 ];
+  [ ...string ].map((x) => x.charCodeAt(0)).forEach((charCode) => {
+    [ 2654435761, 1597334677 ].map((x, i) => { hashes[i] = Math.imul(hashes[i] ^ charCode, x); });
+  });
+  hashes.forEach((x, i, a) => {
+    const other = a[Math.abs(i - 1)];
+    a[i] = Math.imul(x ^ (x >>> 16), 2246822507) ^ Math.imul(other ^ (other >>> 13), 3266489909);
+  });
+  return 4294967296 * (2097151 & hashes[1]) + (hashes[0] >>> 0);
 }
 
 function updateBackground() {
-  const background = backgrounds[cyrb53(backgroundSeed || new Date().setHours(0, 0, 0, 0).toString()) % backgrounds.length];
+  const background = backgrounds[pseudorandom(backgroundSeed || new Date().setHours(0, 0, 0, 0).toString()) % backgrounds.length];
   document.body.style.backgroundImage = `url(https://images.unsplash.com/photo-${background.photoId})`;
   clock.style.color = background.showBlackText ? 'black' : 'white';
 }
