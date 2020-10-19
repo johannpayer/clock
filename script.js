@@ -1,7 +1,7 @@
 let backgroundSeed = null;
 
 // adapted from "bryc" https://stackoverflow.com/questions/7616461/generate-a-hash-from-string-in-javascript
-function pseudorandom(string) {
+function hash(string) {
   const hashes = [ 3735928559, 1103547991 ];
   [ ...string ].map((x) => x.charCodeAt(0)).forEach((charCode) => {
     [ 2654435761, 1597334677 ].map((x, i) => { hashes[i] = Math.imul(hashes[i] ^ charCode, x); });
@@ -14,7 +14,7 @@ function pseudorandom(string) {
 }
 
 function updateBackground() {
-  const background = backgrounds[pseudorandom(backgroundSeed || new Date().setHours(0, 0, 0, 0).toString()) % backgrounds.length];
+  const background = backgrounds[hash(backgroundSeed || new Date().setHours(0, 0, 0, 0).toString()) % backgrounds.length];
   document.body.style.backgroundImage = `url(https://images.unsplash.com/photo-${background.photoId})`;
   clock.style.color = background.showBlackText ? 'black' : 'white';
 }
