@@ -152,4 +152,5 @@ var backgrounds = [
   [ '1598038999696-2a72a0936585', false ],
   [ '1532524869408-e8550b8fc54e', false ],
   [ '1600110099493-db8e356ed121', false ],
+  [ '1601221780494-b84056009f1b', false ],
 ].map((x) => ({ photoId : x[0], showBlackText : x[1] }));
