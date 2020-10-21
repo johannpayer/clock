@@ -1,4 +1,5 @@
-let backgroundSeed = null;
+let backgroundSeed;
+let lastDayUpdate;
 
 // adapted from "bryc" https://stackoverflow.com/questions/7616461/generate-a-hash-from-string-in-javascript
 function hash(string) {
@@ -21,12 +22,15 @@ function updateBackground() {
 
 function updateClock(force) {
   const date = new Date();
+  const day = date.getDay();
+  if ((day !== lastDayUpdate || !lastDayUpdate) && !backgroundSeed) {
+    updateBackground();
+    lastDayUpdate = day;
+  }
+
   if (date.getSeconds() === 0 || force) {
     const hours = date.getHours();
     const minutes = date.getMinutes();
-    if (hours === 0 && minutes === 0 && backgroundSeed === null) {
-      updateBackground();
-    }
 
     const displayHours = hours % 12;
     clock.innerHTML = `${displayHours || 12}:${minutes < 10 ? '0' : ''}${minutes} ${hours < 12 ? 'A' : 'P'}M<br>${
