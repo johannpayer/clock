@@ -1,0 +1,3 @@
+This repository previously included a directory titled "bg" containing lots of high-resolution images.
+To reduce the size of the repository's commit history, this specific directory has been purged.
+Consequently, all commits prior to commit "1da81a6" are missing this folder.
