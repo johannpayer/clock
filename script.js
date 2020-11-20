@@ -1,11 +1,11 @@
 let backgroundSeed;
-let lastDayUpdate;
+let lastUpdateDay;
 
-// adapted from "bryc" https://stackoverflow.com/questions/7616461/generate-a-hash-from-string-in-javascript
+// adapted from bryc's response https://stackoverflow.com/questions/7616461/generate-a-hash-from-string-in-javascript
 function hash(string) {
   const hashes = [ 3735928559, 1103547991 ];
   [ ...string ].map((x) => x.charCodeAt(0)).forEach((charCode) => {
-    [ 2654435761, 1597334677 ].map((x, i) => { hashes[i] = Math.imul(hashes[i] ^ charCode, x); });
+    [ 2654435761, 1597334677 ].forEach((x, i) => { hashes[i] = Math.imul(hashes[i] ^ charCode, x); });
   });
   hashes.forEach((x, i, a) => {
     const other = a[Math.abs(i - 1)];
@@ -20,20 +20,18 @@ function updateBackground() {
   clock.style.color = background.showBlackText ? 'black' : 'white';
 }
 
-function updateClock(force) {
+function updateClock(doForce) {
   const date = new Date();
   const day = date.getDay();
-  if ((day !== lastDayUpdate || !lastDayUpdate) && !backgroundSeed) {
+  if ((day !== lastUpdateDay || !lastUpdateDay) && !backgroundSeed) {
     updateBackground();
-    lastDayUpdate = day;
+    lastUpdateDay = day;
   }
 
-  if (date.getSeconds() === 0 || force) {
+  if (date.getSeconds() === 0 || doForce) {
     const hours = date.getHours();
     const minutes = date.getMinutes();
-
-    const displayHours = hours % 12;
-    clock.innerHTML = `${displayHours || 12}:${minutes < 10 ? '0' : ''}${minutes} ${hours < 12 ? 'A' : 'P'}M<br>${
+    clock.innerHTML = `${hours % 12 || 12}:${minutes < 10 ? '0' : ''}${minutes} ${hours < 12 ? 'A' : 'P'}M<br>${
       date.toLocaleDateString('en-us', {
         month : 'long',
         day : 'numeric',
@@ -43,10 +41,10 @@ function updateClock(force) {
 }
 
 window.addEventListener('load', () => {
-  const args = window.location.href.split('?seed=');
-  if (args.length === 2) {
-    // eslint-disable-next-line prefer-destructuring
-    backgroundSeed = args[1];
+  const seperator = '?seed=';
+  const param = window.location.href.split('&').find((x) => x.includes(seperator));
+  if (param) {
+    backgroundSeed = param.split(seperator)[1];
   }
 
   updateBackground();
