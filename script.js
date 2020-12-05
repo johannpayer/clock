@@ -20,15 +20,17 @@ function updateBackground() {
   clock.style.color = background.showBlackText ? 'black' : 'white';
 }
 
+let lastMinute;
 function updateClock(doForce) {
   const date = new Date();
   const day = date.getDay();
-  if ((day !== lastUpdateDay || !lastUpdateDay) && !backgroundSeed) {
+  if (day !== lastUpdateDay && !backgroundSeed) {
     updateBackground();
     lastUpdateDay = day;
   }
 
-  if (date.getSeconds() === 0 || doForce) {
+  const minuteTime = (new Date()).setSeconds(0, 0);
+  if (lastMinute !== minuteTime || doForce) {
     const hours = date.getHours();
     const minutes = date.getMinutes();
     clock.innerHTML = `${hours % 12 || 12}:${minutes < 10 ? '0' : ''}${minutes} ${hours < 12 ? 'A' : 'P'}M<br>${
@@ -37,12 +39,14 @@ function updateClock(doForce) {
         day : 'numeric',
         weekday : 'long',
       })}`;
+
+      lastMinute = minuteTime;
   }
 }
 
 window.addEventListener('load', () => {
   const seperator = '?seed=';
-  const param = window.location.href.split('&').find((x) => x.includes(seperator));
+  const param = decodeURI(window.location.href).split('&').find((x) => x.includes(seperator));
   if (param) {
     backgroundSeed = param.split(seperator)[1];
   }
