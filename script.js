@@ -26,7 +26,7 @@ function updateBackground() {
         backgrounds.length
     ];
   document.body.style.backgroundImage = `url(https://images.unsplash.com/photo-${background.photoId})`;
-  clock.style.color = background.showBlackText ? 'black' : 'white';
+  clock.style.color = background.doShowBlackText ? 'black' : 'white';
 }
 
 let lastMinute;
