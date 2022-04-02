@@ -1,13 +1,13 @@
 let backgroundSeed;
 let lastUpdateDay;
 
-function hash(string) {
+function getHash(string) {
   const hashes = [3735928559, 1103547991];
-  [...string].forEach((char) => {
-    [2654435761, 1597334677].forEach((x, i) => {
-      hashes[i] = Math.imul(hashes[i] ^ char.charCodeAt(0), x);
-    });
-  });
+  [...string].forEach((char) =>
+    [2654435761, 1597334677].forEach(
+      (x, i) => (hashes[i] = Math.imul(hashes[i] ^ char.charCodeAt(0), x))
+    )
+  );
 
   hashes.forEach((x, i, a) => {
     const other = a[Math.abs(i - 1)];
@@ -20,11 +20,11 @@ function hash(string) {
 }
 
 function updateBackground() {
-  const background =
-    backgrounds[
-      hash(backgroundSeed || new Date().setHours(0, 0, 0, 0).toString()) %
-        backgrounds.length
-    ];
+  const hash = getHash(
+    backgroundSeed ?? new Date().setHours(0, 0, 0, 0).toString()
+  );
+
+  const background = backgrounds[hash % backgrounds.length];
   document.body.style.backgroundImage = `url(https://images.unsplash.com/photo-${background.photoId})`;
   clock.style.color = background.doShowBlackText ? 'black' : 'white';
 }
@@ -42,17 +42,17 @@ function updateClock(doForce) {
   if (lastMinute !== minuteTime || doForce) {
     const hours = date.getHours();
     const minutes = date.getMinutes();
-    clock.innerHTML = `${hours % 12 || 12}:${
-      minutes < 10 ? '0' : ''
-    }${minutes} ${hours < 12 ? 'A' : 'P'}M<br>${date.toLocaleDateString(
-      'en-us',
-      {
-        month: 'long',
-        day: 'numeric',
-        weekday: 'long',
-      }
-    )}`;
 
+    const displayHour = hours % 12 || 12;
+    const displayMinutes = `${minutes < 10 ? '0' : ''}${minutes}`;
+    const hourSuffix = `${hours < 12 ? 'A' : 'P'}M`;
+    const displayDate = date.toLocaleDateString('en-us', {
+      month: 'long',
+      day: 'numeric',
+      weekday: 'long',
+    });
+
+    clock.innerHTML = `${displayHour}:${displayMinutes} ${hourSuffix}<br>${displayDate}`;
     lastMinute = minuteTime;
   }
 }
@@ -62,6 +62,7 @@ window.addEventListener('load', () => {
   const param = decodeURI(window.location.href)
     .split('&')
     .find((x) => x.includes(seperator));
+
   if (param) {
     backgroundSeed = param.split(seperator)[1];
   }
