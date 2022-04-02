@@ -25,7 +25,10 @@ function updateBackground() {
   );
 
   const background = backgrounds[hash % backgrounds.length];
-  document.body.style.backgroundImage = `url(https://images.unsplash.com/photo-${background.photoId})`;
+
+  const { width, height } = window.screen;
+  document.body.style.backgroundImage = `url(https://images.unsplash.com/photo-${background.photoId}?w=${width}&h=${height})`;
+
   clock.style.color = background.doShowBlackText ? 'black' : 'white';
 }
 
